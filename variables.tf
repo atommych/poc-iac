@@ -6,3 +6,20 @@ variable "aws_region" {
   type    = string
   default = "us-east-1"
 }
+
+variable "function_name" {
+  default = "aws_etl"
+}
+
+variable "runtime" {
+  default = "python3.7"
+}
+
+variable "path_source_code" {
+  default = "aws_lambda_functions/ETL"
+}
+
+variable "output_path" {
+  description = "Path to function's deployment package into local filesystem. eg: /path/lambda_function.zip"
+  default = "lambda_function.zip"
+}
