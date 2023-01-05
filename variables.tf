@@ -12,7 +12,7 @@ variable "function_name" {
 }
 
 variable "runtime" {
-  default = "python3.7"
+  default = "python3.8"
 }
 
 variable "path_source_code" {

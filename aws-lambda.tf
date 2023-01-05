@@ -27,7 +27,7 @@ resource "null_resource" "install_python_dependencies" {
 }
 
 data "archive_file" "function_zip" {
-  depends_on = ["null_resource.install_python_dependencies"]
+  depends_on = [null_resource.install_python_dependencies]
   source_dir  = local.function_source_dir
   type        = "zip"
   output_path = "${local.function_source_dir}.zip"
