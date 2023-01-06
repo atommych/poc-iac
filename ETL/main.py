@@ -23,9 +23,12 @@ def handler(event, context):
     new_table.to_csv(path_test+'/'+file_name)
 
     s3 = boto3.resource(u's3')
-    bucket = s3.Bucket(u'learn-terraform-functions-friendly-kindly-diverse-flea')
+    bucket = s3.Bucket('aws_s3_bucket.id')
 
-    bucket.upload_file(path_test, file_name)
+    bucket.upload_file(
+        Key=file_name,
+        Filename=path_test+'/'+file_name,
+        Bucket="aws_s3_bucket.id")
 
     return {
         'status': 'True',

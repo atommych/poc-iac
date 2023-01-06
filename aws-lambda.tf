@@ -6,15 +6,13 @@ variable "env_name" {
 locals {
   function_name               = "ETL"
   function_handler            = "main.handler"
-  function_runtime            = "python3.9"
+  function_runtime            = var.runtime
   function_timeout_in_seconds = 5
-
-  function_source_dir = "${path.module}/aws_lambda_functions/${local.function_name}"
 }
 
 resource "null_resource" "install_python_dependencies" {
   provisioner "local-exec" {
-    command = "bash ${path.module}/aws_lambda_functions/scripts/create_pkg.sh"
+    command = "bash ${path.module}/scripts/create_pkg.sh"
 
     environment = {
       source_code_path = var.path_source_code
@@ -28,9 +26,9 @@ resource "null_resource" "install_python_dependencies" {
 
 data "archive_file" "function_zip" {
   depends_on = [null_resource.install_python_dependencies]
-  source_dir  = local.function_source_dir
+  source_dir  = "${path.cwd}/${var.function_name}"
+  output_path = var.output_path
   type        = "zip"
-  output_path = "${local.function_source_dir}.zip"
 }
 
 resource "aws_lambda_function" "function" {
@@ -39,7 +37,7 @@ resource "aws_lambda_function" "function" {
   runtime       = local.function_runtime
   timeout       = local.function_timeout_in_seconds
 
-  filename         = "${local.function_source_dir}.zip"
+  filename         = var.output_path
   source_code_hash = data.archive_file.function_zip.output_base64sha256
 
   role = aws_iam_role.function_role.arn
@@ -54,8 +52,8 @@ resource "aws_lambda_function" "function" {
 }
 
 resource "random_pet" "lambda_bucket_name" {
-  prefix = "learn-terraform-functions"
-  length = 4
+  prefix = "poc"
+  length = 2
 }
 
 resource "aws_s3_bucket" "lambda_bucket" {

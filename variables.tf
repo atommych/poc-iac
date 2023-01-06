@@ -16,7 +16,7 @@ variable "runtime" {
 }
 
 variable "path_source_code" {
-  default = "aws_lambda_functions/ETL"
+  default = "ETL"
 }
 
 variable "output_path" {
