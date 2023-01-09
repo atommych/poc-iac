@@ -8,7 +8,7 @@ variable "aws_region" {
 }
 
 variable "function_name" {
-  default = "aws_etl"
+  default = "ETL"
 }
 
 variable "runtime" {

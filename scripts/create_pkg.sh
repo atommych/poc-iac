@@ -14,4 +14,4 @@ echo "Creating deployment package..."
 
 cd .venv/lib/python3.8/site-packages/
 cp -r . $path_cwd/${function_name}
-cp -r $path_cwd/ETL $path_cwd/${function_name}
+#cp -r $path_cwd/ETL $path_cwd/${function_name}

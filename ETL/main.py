@@ -1,4 +1,4 @@
-from botocore.vendored import requests
+import requests
 import boto3
 import pandas as pd
 import io
@@ -15,7 +15,7 @@ def transform(file):
     return df
 
 def handler(event, context):
-    path_test = '/tmp/output'
+    path_test = '/tmp'
     file_name = 'carlsberg.csv'
 
     csv_file = extract()
@@ -26,9 +26,9 @@ def handler(event, context):
     bucket = s3.Bucket('aws_s3_bucket.id')
 
     bucket.upload_file(
-        Key=file_name,
-        Filename=path_test+'/'+file_name,
-        Bucket="aws_s3_bucket.id")
+        path_test+'/'+file_name,
+        'poc-verified-minnow',
+        '')
 
     return {
         'status': 'True',
