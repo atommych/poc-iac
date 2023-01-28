@@ -2,6 +2,7 @@ import requests
 import boto3
 import pandas as pd
 import io
+import os
 
 def extract():
     url = 'https://www.trismegistos.org/geo/georef_list_export.php?referral_page=georef_list&tex_id=56084&order=standard'
@@ -18,17 +19,24 @@ def handler(event, context):
     path_test = '/tmp'
     file_name = 'carlsberg.csv'
 
+    bucket_name = os.environ['bucket_name']
+    print(bucket_name)
+
+    s3 = boto3.resource(u's3')
+    bucket = s3.Bucket(bucket_name)
+
+    #s3_client = boto3.client('s3')
+    #buckets = s3_client.list_buckets()
+    #print(buckets)
+
     csv_file = extract()
     new_table = transform(csv_file)
     new_table.to_csv(path_test+'/'+file_name)
 
-    s3 = boto3.resource(u's3')
-    bucket = s3.Bucket('aws_s3_bucket.id')
-
     bucket.upload_file(
         path_test+'/'+file_name,
-        'poc-verified-minnow',
-        '')
+        bucket_name,
+        None)
 
     return {
         'status': 'True',
