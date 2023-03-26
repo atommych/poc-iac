@@ -1,3 +1,5 @@
+# Providers definitions
+
 terraform {
   cloud {
     organization = "example-org-e436c4"
