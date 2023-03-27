@@ -13,7 +13,7 @@ This is a Terraform project that provisions the infrastructure needed to run an 
 4. Setup AWS Cli:	https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
 
 5. Install Terraform: https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
-
+   
 6. Create Terraform Account: 	https://app.terraform.io/
 
 7. Create Terraform Cloud workspace:  https://app.terraform.io/app/<YOUR_ORGANIZATION>/workspaces/new
@@ -22,9 +22,11 @@ This is a Terraform project that provisions the infrastructure needed to run an 
 
 9. Add variables to terraform workspace: https://app.terraform.io/app/<YOUR_ORGANIZATION>/workspaces/<YOUR_WORKSPACE>/variables
 
-   9.1. AWS_ACCESS_KEY_ID = AWS Access key ID (generated in step 3
+   9.1. AWS_ACCESS_KEY_ID = AWS Access key ID (generated in step 3)
 
-   9.2. AWS_SECRET_ACCESS_KEY = AWS Secret access key (generated in step 3
+   9.2. AWS_SECRET_ACCESS_KEY = AWS Secret access key (generated in step 3)
+   
+   ![Terraform Variables](/docs/imgs/terraform_vars.png)
 
 10. Login into Terraform with: *terraform login*
 
@@ -38,7 +40,19 @@ This is a Terraform project that provisions the infrastructure needed to run an 
     
     terraform apply 
 
+# AWS Resources
+
+## AWS Lambda Function
+
+![AWS Lambda Function](/docs/imgs/aws_lambda.png)
+
+## AWS S3 Bucket
+
+![AWS S3 Bucket](/docs/imgs/aws_s3.png)
+
+
 # Destroy
     
     terraform destroy
 
+   ![Terraform Destroy](/docs/imgs/terraform_destroy.png)
