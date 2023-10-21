@@ -1,4 +1,4 @@
-# poc-iac-iaas-etl
+# poc-iac
 
 This is a Terraform project that provisions the infrastructure needed to run an AWS Lambda function to execute an ETL process using Python code and store the data into a Amazon S3 Bucket.
 
